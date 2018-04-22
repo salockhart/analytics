@@ -24,6 +24,7 @@ app.post('/track/:siteID', (req, res) => {
 
     const document = Object.assign({}, req.body, {
       ip: req.ip,
+      datetime: new Date(),
     });
 
     collection.insertOne(document, (error, result) => {
