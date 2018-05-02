@@ -136,7 +136,6 @@ app.post('/track/:siteID', (req, res) => {
     const collection = db.collection(req.params.siteID);
 
     const document = Object.assign({}, req.body, {
-      ip: req.ip,
       datetime: new Date(),
     });
 
