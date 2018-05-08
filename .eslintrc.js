@@ -5,6 +5,7 @@ module.exports = {
     ],
     "rules": {
         "consistent-return": "off",
+        "arrow-body-style": "off",
         "no-console": ["error", { allow: ["warn", "error"] }],
     }
 };
