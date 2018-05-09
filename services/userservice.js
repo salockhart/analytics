@@ -188,23 +188,20 @@ const resolveQueries = (username) => {
               });
             });
           }).then((data) => {
+            let processedData = data;
             switch (query.type) {
               case 'date':
-                return {
-                  name: query.name,
-                  data: postProcessDate(data),
-                };
+                processedData = postProcessDate(data);
+                break;
               case 'discrete':
-                return {
-                  name: query.name,
-                  data: postProcessDiscrete(data),
-                };
+                processedData = postProcessDiscrete(data);
+                break;
               default:
-                return {
-                  name: query.name,
-                  data,
-                };
+                break;
             }
+            return Object.assign({}, query, {
+              data: processedData,
+            });
           });
         })).then((collectionData) => {
           return {
