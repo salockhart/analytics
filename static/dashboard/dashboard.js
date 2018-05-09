@@ -34,10 +34,12 @@ function processDateData(collection, query, idx) {
         height = 300 - margin.top - margin.bottom;
 
     var x = d3.scaleBand()
-        .rangeRound([0, width]);
+        .rangeRound([0, width])
+        .domain(query.data.map(function(d) { return d._id; }));
 
     var y = d3.scaleLinear()
-        .range([height, 0]);
+        .range([height, 0])
+        .domain([0, d3.max(query.data, function(d) { return d.num; })]);
 
     var chart = d3.select('.' + id)
         .attr("width", width + margin.left + margin.right)
@@ -45,14 +47,13 @@ function processDateData(collection, query, idx) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    x.domain(query.data.map(function(d) { return d._id; }));
-    y.domain([0, d3.max(query.data, function(d) { return d.num; })]);
-    
+    // X Axis Ticks
     chart.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
+    // Y Axis Ticks
     chart.append("g")
         .attr("class", "y axis")
         .call(d3.axisLeft(y))
@@ -63,6 +64,7 @@ function processDateData(collection, query, idx) {
             .style("text-anchor", "end")
             .text("Frequency");
 
+    // Bars
     chart.selectAll(".bar")
         .data(query.data)
         .enter().append("rect")
@@ -84,19 +86,18 @@ function processDiscreteData(collection, query, idx) {
         height = 300 - margin.top - margin.bottom;
 
     var x = d3.scaleBand()
-        .rangeRound([0, width]);
+        .rangeRound([0, width])
+        .domain(query.data.map(function(d) { return d._id; }));
 
     var y = d3.scaleLinear()
-        .range([height, 0]);
+        .range([height, 0])
+        .domain([0, d3.max(query.data, function(d) { return d.num; })]);
 
     var chart = d3.select('.' + id)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-    x.domain(query.data.map(function(d) { return d._id; }));
-    y.domain([0, d3.max(query.data, function(d) { return d.num; })]);
     
     // X Axis Ticks
     chart.append("g")
