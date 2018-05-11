@@ -1,5 +1,11 @@
 'use strict';
 $(function () {
+    const token = localStorage.getItem('token');
+    if (token) {
+        window.location.href = "/dashboard";
+        return
+    }
+
     $('.form-signin').submit(function() {
         $.ajax({
             method: 'POST',
