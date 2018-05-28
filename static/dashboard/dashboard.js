@@ -29,7 +29,7 @@ function processDateData(collection, query, idx) {
     collectionData.append('<h2>' + query.name + '</h2>');
     collectionData.append('<svg class="chart ' + id + '" />');
     
-    var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    var margin = {top: 20, right: 30, bottom: 60, left: 40},
         width = (query.data.length * 25) - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
@@ -51,7 +51,12 @@ function processDateData(collection, query, idx) {
     chart.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)" );
 
     // Y Axis Ticks
     chart.append("g")
@@ -81,9 +86,9 @@ function processDiscreteData(collection, query, idx) {
     collectionData.append('<h2>' + query.name + '</h2>');
     collectionData.append('<svg class="chart ' + id + '" />');
     
-    var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    var margin = {top: 20, right: 30, bottom: 200, left: 40},
         width = 400 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+        height = 470 - margin.top - margin.bottom;
 
     var x = d3.scaleBand()
         .rangeRound([0, width])
@@ -103,7 +108,12 @@ function processDiscreteData(collection, query, idx) {
     chart.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)" );
 
     // Y Axis Ticks
     chart.append("g")

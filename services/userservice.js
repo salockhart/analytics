@@ -157,7 +157,7 @@ const postProcessDate = (data) => {
   }
 
   return processed.map(point => ({
-    _id: point._id.day,
+    _id: `${point._id.year}-${point._id.month}-${point._id.day}`,
     num: point.num,
   }));
 };
